@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
 
 export default function BudgetScreen() {
   return (
@@ -7,6 +8,7 @@ export default function BudgetScreen() {
         Hello! The model is finished. This is the output: Nothing because it
         doesn't work yet.
       </Text>
+      <Link href="/(tabs)">Go back to the loading screen</Link>
     </View>
   );
 }
