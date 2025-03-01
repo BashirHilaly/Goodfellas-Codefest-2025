@@ -33,7 +33,7 @@ const TabsLayout = () => {
         ),
       })} />
       <Tabs.Screen name="mechanic" 
-      options={({ navigation }) => ({ 
+      options={({ navigation }) => ({
         title: 'Mechanic',
         tabBarLabel: 'Mechanic',
         headerShown: false,
