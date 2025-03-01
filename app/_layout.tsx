@@ -13,7 +13,7 @@ export default function RootLayout() {
   return (
     <ConvexProvider client={convex}>
       <Stack>
-        <Stack.Screen name="index" />
+        <Stack screenOptions={{ headerShown: false }} />
       </Stack>
     </ConvexProvider>
   );
