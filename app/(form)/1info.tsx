@@ -1,12 +1,20 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 import { Link } from "expo-router";
+import TestCamera from "@/components/screens/TestCamera";
 
 export default function InfoScreen() {
   return (
-    <View>
-      <Text className="text-red-500">Here is some info you need to know</Text>
-      <Link href="/(form)/2roomDetails">Continue</Link>
-    </View>
+    <SafeAreaView className="flex-1">
+      <View className="flex-1">
+        <Text className="text-red-500">Here is some info you need to know</Text>
+        <Link href="/(form)/2roomDetails" className="bg-blue-500 px-4 py-2 rounded-lg">
+          <Text className="text-white font-semibold text-center">Continue</Text>
+        </Link>
+        <View className="flex-1">
+          <TestCamera />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
