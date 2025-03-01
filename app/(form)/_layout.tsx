@@ -2,20 +2,10 @@ import { Stack } from "expo-router";
 
 export default function FormLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#f4511e",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
+    <Stack>
       <Stack.Screen name="addrTime" />
       <Stack.Screen name="confirm" />
-      <Stack.Screen name="info" />
+      <Stack.Screen name="index" />
       <Stack.Screen name="materials" />
       <Stack.Screen name="project" />
       <Stack.Screen name="roomDetails" />
