@@ -1,9 +1,19 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import React, { useEffect } from "react";
 
 export default function LoadingScreen() {
-    // create a function that counts for 5 seconds just to test fake loading functionality
-    // after 5 seconds, go to the budget screen
+  const router = useRouter();
+
+  useEffect(() => {
+    // Set a timer to navigate to the Info Screen after 2 seconds
+    const timer = setTimeout(() => {
+      router.replace("/(output)/estimate");
+    }, 3000);
+
+    // Cleanup the timer if the component unmounts before the timer ends
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
     <View>
@@ -11,7 +21,6 @@ export default function LoadingScreen() {
         Hello! I am currently loading your data into the AI model. Please wait
         until it is done.
       </Text>
-      <Link href="/(tabs)/budget">We are done!</Link>
     </View>
   );
 }
