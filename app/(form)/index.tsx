@@ -8,7 +8,6 @@ export default function InfoScreen() {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1">
-        <ProgressBar currentStep={0}></ProgressBar>
         <Text className="text-6xl">Before We Get Started</Text>
         <Text className="text-red-500">Here is some info you need to know</Text>
         <Link
