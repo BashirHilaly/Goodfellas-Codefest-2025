@@ -1,5 +1,7 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
+
+
 export const insertGeneration = mutation({
     args: {
         // userId: v.string(),
@@ -44,7 +46,6 @@ export const insertGeneration = mutation({
             },
         });
 
-        
 
         return generation;
     }   

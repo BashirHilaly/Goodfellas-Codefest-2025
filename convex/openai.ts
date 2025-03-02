@@ -41,7 +41,7 @@ export const testOpenAi = action({
                         role: "user",
                         content: [
                             { type: "text", text: "Describe this image in one sentence" },
-                            { type: "image_url", image_url: { url: args.image } }
+                            { type: "image_url", image_url: { url: `data:image/jpeg;base64,${args.image}` }}
                         ]
                     }
                 ]

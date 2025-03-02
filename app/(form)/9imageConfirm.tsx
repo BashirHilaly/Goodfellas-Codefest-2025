@@ -35,7 +35,7 @@ export default function ImageConfirmScreen() {
         <View style={styles.bottomContainer}>
           {/* Primary action */}
           <ContinueButton
-            nextLink="/(output)/loading"
+            nextLink="/(form)/loading"
             buttonText="Generate Estimate"
           />
 
