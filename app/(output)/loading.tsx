@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Link, useRouter } from "expo-router";
 import React, { useEffect, useContext } from "react";
-import { FormDataContext } from "@/components/ui/FormDataContext";
+import { FormDataContext } from "@/components/FormDataContext";
 
 export default function LoadingScreen() {
   const router = useRouter();

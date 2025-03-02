@@ -8,6 +8,7 @@ import NumberForm from "@/components/ui/NumberForm";
 import { FormDataContext, RoomType } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import OnboardingInputTemplate from "@/components/screens/OnboardingInputTemplate";
+import ContinueButton from "@/components/ui/ContinueButton";
 
 export default function RoomDetailsScreen() {
   const {
