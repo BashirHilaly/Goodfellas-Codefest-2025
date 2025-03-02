@@ -6,7 +6,7 @@ import ProgressBar from "@/components/ui/ProgressBar";
 export default function PhotoPromptScreen() {
   return (
     <View>
-      <ProgressBar currentStep={6}></ProgressBar>
+      <ProgressBar currentStep={5}></ProgressBar>
       <Text className="text-red-500">
         Here it will tell you to take a picture and what it should look like
       </Text>
