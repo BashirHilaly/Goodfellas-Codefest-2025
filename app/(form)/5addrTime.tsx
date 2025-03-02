@@ -2,24 +2,26 @@ import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
-import { FormDataContext } from "@/components/ui/FormDataContext";
+import { FormDataContext, Timeframe } from "@/components/ui/FormDataContext";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
-
-export type Timeframe =
-  | "Within 1-2 Weeks"
-  | "1 Month"
-  | "2 Months"
-  | "3 Months"
-  | "6 Months"
-  | "1 Year";
+import NumberForm from "@/components/ui/NumberForm";
+import TextForm from "@/components/ui/TextForm";
 
 export default function AddrTimeScreen() {
-  const { timeframe, setTimeframe } = useContext(FormDataContext);
+  const { address, setAddress, zipcode, setZipcode, timeframe, setTimeframe } =
+    useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   // An array to cycle through room types.
-  const timeframes: Timeframe[] = ["Within 1-2 Weeks"];
+  const timeframes: Timeframe[] = [
+    "Within 1-2 Weeks",
+    "1 Month",
+    "2 Months",
+    "3 Months",
+    "6 Months",
+    "1 Year",
+  ];
 
   const handleSelectRoom = (selected: Timeframe) => {
     setTimeframe(selected);
@@ -30,24 +32,38 @@ export default function AddrTimeScreen() {
     <View>
       <ProgressBar currentStep={4}></ProgressBar>
       <Text className="text-6xl">Address & Timeframe</Text>
-      <Text className="text-3xl">Address</Text>
+      <TextForm
+        promptText="Address"
+        placeholder="Apartment, suite, etc."
+        value={address.toString()}
+        onChangeText={(text: string) => setAddress(text)}
+      ></TextForm>
+      <NumberForm
+        promptText="Zipcode"
+        placeholder="e.g. 19343"
+        value={zipcode.toString()}
+        onChangeText={(text: string) => setZipcode(Number(text))}
+      ></NumberForm>
       <Text className="text-3xl">Timeframe</Text>
-      <DropdownMenu
-        visible={dropdownVisible}
-        handleOpen={() => setDropdownVisible(true)}
-        handleClose={() => setDropdownVisible(false)}
-        trigger={
-          <View style={styles.triggerStyle}>
-            <Text style={styles.triggerText}>{timeframe}</Text>
-          </View>
-        }
-      >
-        {timeframes.map((type, index) => (
-          <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
-            <Text>{type}</Text>
-          </MenuOption>
-        ))}
-      </DropdownMenu>
+      <View className="mt-8 items-center">
+        <DropdownMenu
+          visible={dropdownVisible}
+          handleOpen={() => setDropdownVisible(true)}
+          handleClose={() => setDropdownVisible(false)}
+          trigger={
+            <View style={styles.triggerStyle}>
+              <Text style={styles.triggerText}>{timeframe}</Text>
+            </View>
+          }
+        >
+          {timeframes.map((type, index) => (
+            <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
+              <Text>{type}</Text>
+            </MenuOption>
+          ))}
+        </DropdownMenu>
+      </View>
+
       <Link href="/(form)/6fieldConfirm">Continue</Link>
     </View>
   );

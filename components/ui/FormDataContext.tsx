@@ -35,6 +35,10 @@ type FormDataContextType = {
   setRoomLength: (length: number) => void;
   usedMaterials: string[];
   setUsedMaterials: (materials: string[]) => void;
+  address: string;
+  setAddress: (address: string) => void;
+  zipcode: number;
+  setZipcode: (zipcode: number) => void;
   timeframe: Timeframe;
   setTimeframe: (time: Timeframe) => void;
 };
@@ -50,6 +54,10 @@ export const FormDataContext = createContext<FormDataContextType>({
   setRoomLength: () => {},
   usedMaterials: [],
   setUsedMaterials: () => {},
+  address: "",
+  setAddress: () => {},
+  zipcode: 0,
+  setZipcode: () => {},
   timeframe: "Within 1-2 Weeks",
   setTimeframe: () => [],
 });
@@ -60,8 +68,9 @@ export const FormDataProvider = ({ children }: { children: ReactNode }) => {
   const [roomWidth, setRoomWidth] = useState(0);
   const [roomLength, setRoomLength] = useState(0);
   const [usedMaterials, setUsedMaterials] = useState<string[]>([]);
-  const [timeframe, setTimeframe] =
-    useState<Timeframe>("Within 1-2 Weeks");
+  const [address, setAddress] = useState("");
+  const [zipcode, setZipcode] = useState(0);
+  const [timeframe, setTimeframe] = useState<Timeframe>("Within 1-2 Weeks");
 
   return (
     <FormDataContext.Provider
@@ -76,6 +85,10 @@ export const FormDataProvider = ({ children }: { children: ReactNode }) => {
         setRoomLength,
         usedMaterials,
         setUsedMaterials,
+        address,
+        setAddress,
+        zipcode,
+        setZipcode,
         timeframe,
         setTimeframe,
       }}
