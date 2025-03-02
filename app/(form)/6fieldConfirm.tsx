@@ -20,7 +20,7 @@ export default function fieldConfirmScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProgressBar currentStep={5} />
+      <ProgressBar currentStep={4} />
       <BackButton></BackButton>
       <Text style={styles.title}>Confirm Inputs</Text>
       {/* Project Description Group */}
