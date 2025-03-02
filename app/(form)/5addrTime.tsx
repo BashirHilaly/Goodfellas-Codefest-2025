@@ -7,6 +7,7 @@ import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
 import TextForm from "@/components/ui/TextForm";
+import BackButton from "@/components/ui/BackButton";
 
 export default function AddrTimeScreen() {
   const { address, setAddress, zipcode, setZipcode, timeframe, setTimeframe } =
@@ -31,6 +32,7 @@ export default function AddrTimeScreen() {
   return (
     <View>
       <ProgressBar currentStep={4}></ProgressBar>
+      <BackButton></BackButton>
       <Text className="text-6xl">Address & Timeframe</Text>
       <TextForm
         promptText="Address"
