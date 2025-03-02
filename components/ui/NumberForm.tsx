@@ -40,17 +40,15 @@ export default function NumberForm({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
   },
   label: {
     fontSize: 16,
-    marginBottom: 10,
   },
   input: {
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10,
-    marginBottom: 20,
   },
 });
