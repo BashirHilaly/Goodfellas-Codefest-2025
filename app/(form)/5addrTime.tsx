@@ -2,12 +2,13 @@ import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
-import { FormDataContext, Timeframe } from "@/components/ui/FormDataContext";
+import { FormDataContext, Timeframe } from "@/components/FormDataContext";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
 import TextForm from "@/components/ui/TextForm";
 import BackButton from "@/components/ui/BackButton";
+import ContinueButton from "@/components/ui/ContinueButton";
 
 export default function AddrTimeScreen() {
   const { address, setAddress, zipcode, setZipcode, timeframe, setTimeframe } =
@@ -66,7 +67,7 @@ export default function AddrTimeScreen() {
         </DropdownMenu>
       </View>
 
-      <Link href="/(form)/6fieldConfirm">Continue</Link>
+      <ContinueButton nextLink="/(form)/6fieldConfirm" buttonText="Continue" />
     </View>
   );
 }

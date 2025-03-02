@@ -41,8 +41,8 @@ type FormDataContextType = {
   setZipcode: (zipcode: number) => void;
   timeframe: Timeframe;
   setTimeframe: (time: Timeframe) => void;
-  image: string;
-  setImage: (image: string) => void;
+  photoUri: string | null;
+  setPhotoUri: (uri: string | null) => void;
 };
 
 export const FormDataContext = createContext<FormDataContextType>({
@@ -62,8 +62,8 @@ export const FormDataContext = createContext<FormDataContextType>({
   setZipcode: () => {},
   timeframe: "Within 1-2 Weeks",
   setTimeframe: () => [],
-  image: "",
-  setImage: () => {},
+  photoUri: null,
+  setPhotoUri: () => {},
 });
 
 export const FormDataProvider = ({ children }: { children: ReactNode }) => {
@@ -75,7 +75,8 @@ export const FormDataProvider = ({ children }: { children: ReactNode }) => {
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState(0);
   const [timeframe, setTimeframe] = useState<Timeframe>("Within 1-2 Weeks");
-  const [image, setImage] = useState("");
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
+
   return (
     <FormDataContext.Provider
       value={{
@@ -95,8 +96,8 @@ export const FormDataProvider = ({ children }: { children: ReactNode }) => {
         setZipcode,
         timeframe,
         setTimeframe,
-        image,
-        setImage,
+        photoUri,
+        setPhotoUri,
       }}
     >
       {children}
