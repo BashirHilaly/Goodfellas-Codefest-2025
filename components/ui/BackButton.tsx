@@ -1,37 +1,41 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 
 export type BackButtonProps = {
   buttonText?: string;
 };
 
-export default function BackButton({
-  buttonText = "Go Back",
-}: BackButtonProps) {
+export default function BackButton({ buttonText }: BackButtonProps) {
   const router = useRouter();
 
   return (
     <TouchableOpacity style={styles.button} onPress={() => router.back()}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
+      <View style={styles.contentRow}>
+        <Text style={styles.arrow}>←</Text>
+        {buttonText && <Text style={styles.buttonText}></Text>}
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "#FFF",
-    paddingVertical: 15,
-    borderRadius: 8,
-    borderWidth: 1.5,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+  },
+  contentRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  arrow: {
+    fontSize: 50,
+    fontWeight: "bold",
+    marginLeft: 20,
   },
   buttonText: {
     color: "#000",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "600",
   },
 });

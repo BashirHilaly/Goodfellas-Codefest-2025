@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
-import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import ContinueButton from "@/components/ui/ContinueButton";
-import BackButton from "@/components/ui/BackButton";
+import { useRouter } from "expo-router";
 import { FormDataContext } from "@/components/FormDataContext";
 
 export default function ImageConfirmScreen() {
   const { photoUri } = useContext(FormDataContext);
-
+  const router = useRouter();
   return (
     <View style={styles.container}>
       {/* Top area for the image */}
@@ -32,7 +39,11 @@ export default function ImageConfirmScreen() {
           <View style={{ height: 10 }} />
 
           {/* Secondary action */}
-          <BackButton buttonText="Retake Photo" />
+          <TouchableOpacity style={styles.button} onPress={() => router.back()}>
+            <View style={styles.contentRow}>
+              <Text style={styles.text}>Retake Photo</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -78,5 +89,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 16,
     textAlign: "left",
+  },
+
+  button: {
+    width: "100%", // Make the button a bit wider
+    height: 70,
+    backgroundColor: "#FFF",
+    paddingVertical: 15, // More vertical padding
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1.5,
+  },
+  text: {
+    color: "#000",
+    fontWeight: "600",
+    fontSize: 20,
+  },
+  contentRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
