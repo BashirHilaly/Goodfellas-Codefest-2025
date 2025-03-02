@@ -5,6 +5,7 @@ import ProgressBar from "@/components/ui/ProgressBar";
 import CheckboxList from "@/components/ui/CheckboxList";
 import { FormDataContext } from "@/components/ui/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
+import ContinueButton from "@/components/ui/ContinueButton";
 
 export default function BuildMaterialsScreen() {
   const { usedMaterials, setUsedMaterials } = useContext(FormDataContext);
@@ -31,7 +32,7 @@ export default function BuildMaterialsScreen() {
         selectedItems={usedMaterials}
         onToggle={handleToggleMaterial}
       />
-      <Link href="/(form)/5addrTime">Continue</Link>
+      <ContinueButton nextLink="/(form)/5addrTime" buttonText="Continue" />
     </View>
   );
 }

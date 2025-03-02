@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Link, useRouter } from "expo-router";
+import ContinueButton from "@/components/ui/ContinueButton";
+import BackButton from "@/components/ui/BackButton";
 
 export default function ImageConfirmScreen() {
   return (
     <View>
       <Text className="text-red-500">You will confirm the image here</Text>
-      <Link href="/(form)/8camera" replace>
-        Retake
-      </Link>
-      <Link href="/(output)/loading" replace>
-        Confirm
-      </Link>
+      <BackButton buttonText="Retake"></BackButton>
+      <ContinueButton nextLink="/(output)/loading" buttonText="Confirm" />
     </View>
   );
 }
