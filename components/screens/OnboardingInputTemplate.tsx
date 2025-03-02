@@ -22,8 +22,8 @@ const OnboardingInputTemplate = ({ children, progressLevel, continueHref, progre
       )}
       {children}
       <View className="absolute bottom-0 w-full p-4 bg-gray-300 flex-row justify-center items-center">
-        <Link href={continueHref as any} className="mb-8">
-          <TouchableOpacity className="bg-[#222222] rounded-lg px-20 py-2">
+        <Link href={continueHref} asChild>
+          <TouchableOpacity className="bg-[#222222] rounded-lg px-20 py-2 mb-12">
             <Text className="text-[#F8F8F8] text-center text-lg font-semibold">Continue</Text>
           </TouchableOpacity>
         </Link>

@@ -18,7 +18,7 @@ const TestCamera = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const cameraRef = useRef<CameraView | null>(null);
   const router = useRouter();
-  const { setPhotoUri } = useContext(FormDataContext);
+  const { setPhotoUri, setPhotoBase64 } = useContext(FormDataContext);
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -58,11 +58,13 @@ const TestCamera = () => {
             console.log(
               "Image captured in base64 format, ready to send to backend"
             );
+            //console.log("Photo resut: ", result.base64)
           }
 
           // save the photo do the app globally
-          setPhotoUri(result.uri);
-
+          // console.log("Photo resut: ", result.base64)
+          setPhotoUri(result.uri!);
+          setPhotoBase64(result.base64!);
           // Navigate straight to the 9imageConfirm screen after taking the photo
           router.push("/9imageConfirm");
         }

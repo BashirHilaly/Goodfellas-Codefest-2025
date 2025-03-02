@@ -28,19 +28,19 @@ export default function InfoScreen() {
         <Text className="text-3xl font-bold">Let's Get Started with Your Estimate!</Text>
         <View className="gap-y-8 py-20">
           <View className="flex-row items-center">
-            <NotebookText size={40} className="mr-2" />
+            <NotebookText size={25} color="black" className="mr-2" />
             <Text className="text-lg leading-5 font-normal">Tell us about your project, room dimensions, and the materials you need.</Text>
           </View>
           <View className="flex-row items-center">
-            <Camera size={40} className="mr-2"/>
+            <Camera size={25} color="black" className="mr-2"/>
             <Text className="text-lg leading-5">Capture a clear image of the space for accurate measurements.</Text>
           </View>
           <View className="flex-row items-center">
-            <FileChartLine size={40} className="mr-2" />
+            <FileChartLine size={25} color="black" className="mr-2" />
             <Text className="text-lg leading-5">See a detailed cost breakdown for materials & labor instantly!</Text>
           </View>
           <View className="flex-row items-center">
-            <Upload size={40} className="mr-2" />
+            <Upload size={25} color="black" className="pr-2" />
             <Text className="text-lg leading-5">Download or send your estimate to clients or team members.</Text>
           </View>
         </View>

@@ -10,9 +10,13 @@ import {
 import ContinueButton from "@/components/ui/ContinueButton";
 import { useRouter } from "expo-router";
 import { FormDataContext } from "@/components/FormDataContext";
+import { useAction } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function ImageConfirmScreen() {
   const { photoUri } = useContext(FormDataContext);
+
+
   const router = useRouter();
   return (
     <View style={styles.container}>

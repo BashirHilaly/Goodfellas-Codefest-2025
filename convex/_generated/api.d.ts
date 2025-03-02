@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as generations from "../generations.js";
+import type * as openai from "../openai.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -25,6 +26,7 @@ import type * as generations from "../generations.js";
  */
 declare const fullApi: ApiFromModules<{
   generations: typeof generations;
+  openai: typeof openai;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
