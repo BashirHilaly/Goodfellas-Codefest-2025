@@ -23,7 +23,7 @@ export default defineSchema({
                 task_materials: v.optional(v.array(v.object({
                     material_name: v.string(),
                     material_quantity: v.number(),
-                    material_unit: v.string(),
+                    material_unit_price: v.number(),
                 }))),
             })),
         }),

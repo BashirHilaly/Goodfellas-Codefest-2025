@@ -7,6 +7,7 @@ import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
 import { FormDataContext, RoomType } from "@/components/ui/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
+import OnboardingInputTemplate from "@/components/screens/OnboardingInputTemplate";
 
 export default function RoomDetailsScreen() {
   const {
@@ -18,6 +19,16 @@ export default function RoomDetailsScreen() {
     setRoomLength,
   } = useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const [testingTemplate, setTestingTemplate] = useState(false);
+
+  if (testingTemplate) {
+    return (
+      <OnboardingInputTemplate progressLevel={1} continueHref="/(form)/3projDesc" backButtonPresent={true} backHref="/(form)/index">
+        <Text>Here is some info you need to know</Text>
+      </OnboardingInputTemplate>
+    );
+  }
 
   // An array to cycle through room types.
   const roomTypes: RoomType[] = [
