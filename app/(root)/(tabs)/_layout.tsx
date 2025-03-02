@@ -41,7 +41,7 @@ const TabsLayout = () => {
           <Wrench size={35} color={focused ? blue : '#000000'} />
         ),
       })} />
-      <Tabs.Screen name="profile" 
+      <Tabs.Screen name="profile"
         options={({ navigation }) => ({ 
           title: 'Profile',
           tabBarLabel: 'Profile',
