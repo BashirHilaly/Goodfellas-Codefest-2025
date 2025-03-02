@@ -1,6 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
@@ -25,7 +30,12 @@ export default function RoomDetailsScreen() {
 
   if (testingTemplate) {
     return (
-      <OnboardingInputTemplate progressLevel={1} continueHref="/(form)/3projDesc" backButtonPresent={true} backHref="/(form)/index">
+      <OnboardingInputTemplate
+        progressLevel={1}
+        continueHref="/(form)/3projDesc"
+        backButtonPresent={true}
+        backHref="/(form)/index"
+      >
         <Text>Here is some info you need to know</Text>
       </OnboardingInputTemplate>
     );
@@ -54,67 +64,158 @@ export default function RoomDetailsScreen() {
   };
 
   return (
-    <View className="flex-1">
+    <View style={styles.screen}>
+      {/* Progress bar at the top */}
       <ProgressBar currentStep={1} />
-      <BackButton></BackButton>
-      <Text className="text-6xl">Room Details</Text>
-      {/* For the room type */}
-      <Text className="text-3xl">Room Type</Text>
-      <View className="mt-8 items-center">
-        <DropdownMenu
-          visible={dropdownVisible}
-          handleOpen={() => setDropdownVisible(true)}
-          handleClose={() => setDropdownVisible(false)}
-          trigger={
-            <View style={styles.triggerStyle}>
-              <Text style={styles.triggerText}>{roomType}</Text>
-            </View>
-          }
-        >
-          {roomTypes.map((type, index) => (
-            <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
-              <Text>{type}</Text>
-            </MenuOption>
-          ))}
-        </DropdownMenu>
-      </View>
 
-      {/* For the room dimensions */}
-      <Text className="text-3xl">Room Dimensions</Text>
-      <NumberForm
-        promptText="Width (ft)"
-        value={roomWidth.toString()}
-        onChangeText={(text: string) => setRoomWidth(Number(text))}
-      />
-      <NumberForm
-        promptText="Length (ft)"
-        value={roomLength.toString()}
-        onChangeText={(text: string) => setRoomLength(Number(text))}
-      />
-      <ContinueButton nextLink="/(form)/3projDesc" buttonText="Continue" />
+      <BackButton />
+
+      {/* Scrollable content area */}
+      <ScrollView
+        style={styles.contentContainer}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        {/* Title */}
+        <Text style={styles.title}>Room Details</Text>
+
+        {/* Room Type */}
+        <Text style={styles.instructionLabel}>Room Type</Text>
+        <View style={styles.dropdownContainer}>
+          <DropdownMenu
+            visible={dropdownVisible}
+            handleOpen={() => setDropdownVisible(true)}
+            handleClose={() => setDropdownVisible(false)}
+            trigger={
+              <TouchableOpacity
+                style={styles.dropdownTrigger}
+                onPress={() => setDropdownVisible(true)}
+              >
+                <Text style={styles.triggerText}>{roomType}</Text>
+                <Text style={styles.caret}>▼</Text>
+              </TouchableOpacity>
+            }
+          >
+            {roomTypes.map((type, index) => (
+              <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
+                <Text>{type}</Text>
+              </MenuOption>
+            ))}
+          </DropdownMenu>
+        </View>
+
+        {/* Room Dimensions */}
+        <Text style={[styles.instructionLabel, { marginTop: 20 }]}>
+          Room Dimensions
+        </Text>
+        <Text style={styles.instruction}>
+          Measure the longest width and length of the space in feet
+        </Text>
+        <View style={styles.dimensionsRow}>
+          <View style={styles.dimensionBox}>
+            <NumberForm
+              promptText="W"
+              placeholder="Width"
+              value={roomWidth.toString()}
+              onChangeText={(text: string) => setRoomWidth(Number(text))}
+            />
+          </View>
+          <Text style={styles.multiplySign}>x</Text>
+          <View style={styles.dimensionBox}>
+            <NumberForm
+              promptText="L"
+              placeholder="Length"
+              value={roomLength.toString()}
+              onChangeText={(text: string) => setRoomLength(Number(text))}
+            />
+          </View>
+        </View>
+      </ScrollView>
+
+      {/* Bottom-aligned Continue button */}
+      <View style={styles.bottomContainer}>
+        <ContinueButton nextLink="/(form)/3projDesc" buttonText="Continue" />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  // Main screen container
+  screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f5fcff",
+    backgroundColor: "#fff",
   },
-  triggerStyle: {
-    height: 40,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 150,
+  // Container for the back button
+  header: {
     paddingHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  // Scrollable content
+  contentContainer: {
+    flex: 1,
+  },
+  scrollContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  // Title
+  title: {
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 20,
+  },
+  // Sub-headings or field labels
+  instructionLabel: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 8,
+  },
+  // Smaller instruction text
+  instruction: {
+    fontSize: 14,
+    color: "#333",
+    marginBottom: 10,
+    lineHeight: 20,
+  },
+  // Dropdown styling
+  dropdownContainer: {
+    marginBottom: 20,
+  },
+  dropdownTrigger: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 6,
+    paddingHorizontal: 12,
     paddingVertical: 10,
-    borderRadius: 5,
   },
   triggerText: {
     fontSize: 16,
+  },
+  caret: {
+    fontSize: 14,
+    marginLeft: 8,
+    color: "#999",
+  },
+  // Dimensions row
+  dimensionsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  dimensionBox: {
+    flex: 1,
+  },
+  multiplySign: {
+    marginHorizontal: 8,
+    fontSize: 16,
+  },
+  // Bottom container for Continue button
+  bottomContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
   },
 });

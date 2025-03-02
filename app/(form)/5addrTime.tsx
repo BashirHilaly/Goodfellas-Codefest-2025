@@ -1,6 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { FormDataContext, Timeframe } from "@/components/FormDataContext";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
@@ -25,72 +30,166 @@ export default function AddrTimeScreen() {
     "1 Year",
   ];
 
-  const handleSelectRoom = (selected: Timeframe) => {
+  const handleSelectTimeframe = (selected: Timeframe) => {
     setTimeframe(selected);
     setDropdownVisible(false);
   };
 
   return (
-    <View>
-      <ProgressBar currentStep={4}></ProgressBar>
-      <BackButton></BackButton>
-      <Text className="text-6xl">Address & Timeframe</Text>
-      <TextForm
-        promptText="Address"
-        placeholder="Apartment, suite, etc."
-        value={address.toString()}
-        onChangeText={(text: string) => setAddress(text)}
-      ></TextForm>
-      <NumberForm
-        promptText="Zipcode"
-        placeholder="e.g. 19343"
-        value={zipcode.toString()}
-        onChangeText={(text: string) => setZipcode(Number(text))}
-      ></NumberForm>
-      <Text className="text-3xl">Timeframe</Text>
-      <View className="mt-8 items-center">
-        <DropdownMenu
-          visible={dropdownVisible}
-          handleOpen={() => setDropdownVisible(true)}
-          handleClose={() => setDropdownVisible(false)}
-          trigger={
-            <View style={styles.triggerStyle}>
-              <Text style={styles.triggerText}>{timeframe}</Text>
-            </View>
-          }
-        >
-          {timeframes.map((type, index) => (
-            <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
-              <Text>{type}</Text>
-            </MenuOption>
-          ))}
-        </DropdownMenu>
-      </View>
+    <View style={styles.screen}>
+      {/* Progress bar at the top */}
+      <ProgressBar currentStep={4} />
 
-      <ContinueButton nextLink="/(form)/6fieldConfirm" buttonText="Continue" />
+      <BackButton />
+
+      {/* Scrollable content area */}
+      <ScrollView
+        style={styles.contentContainer}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        {/* Title */}
+        <Text style={styles.title}>Address & Timeframe</Text>
+
+        {/* Instruction text */}
+        <Text style={styles.instruction}>
+          Enter the project address to get location-based pricing and choose an
+          estimated timeframe.
+        </Text>
+
+        {/* Address field */}
+        <View style={styles.textContainer}>
+          <Text style={styles.instructionLabel}>Address</Text>
+          <TextForm
+            placeholder="Apartment, suite, etc."
+            value={address}
+            onChangeText={(text: string) => setAddress(text)}
+          />
+        </View>
+
+        {/* ZIP Code field */}
+        <View style={styles.textContainer}>
+          <Text style={styles.instructionLabel}>ZIP Code</Text>
+          <NumberForm
+            placeholder="e.g. 19343"
+            value={zipcode.toString()}
+            onChangeText={(text: string) => setZipcode(Number(text))}
+          />
+        </View>
+
+        {/* Timeframe dropdown */}
+        <View style={styles.outerDropdownContainer}>
+          <Text style={styles.instructionLabel}>Timeframe</Text>
+          <View style={styles.dropdownContainer}>
+            <DropdownMenu
+              visible={dropdownVisible}
+              handleOpen={() => setDropdownVisible(true)}
+              handleClose={() => setDropdownVisible(false)}
+              trigger={
+                <TouchableOpacity
+                  style={styles.dropdownTrigger}
+                  onPress={() => setDropdownVisible(true)}
+                >
+                  <Text style={styles.triggerText}>{timeframe}</Text>
+                  <Text style={styles.caret}>▼</Text>
+                </TouchableOpacity>
+              }
+            >
+              {timeframes.map((time, index) => (
+                <MenuOption
+                  key={index}
+                  onSelect={() => handleSelectTimeframe(time)}
+                >
+                  <Text>{time}</Text>
+                </MenuOption>
+              ))}
+            </DropdownMenu>
+          </View>
+        </View>
+      </ScrollView>
+
+      {/* Bottom-aligned Continue button */}
+      <View style={styles.bottomContainer}>
+        <ContinueButton
+          nextLink="/(form)/6fieldConfirm"
+          buttonText="Continue"
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  // Main screen container
+  screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f5fcff",
+    backgroundColor: "#fff",
   },
-  triggerStyle: {
-    height: 40,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 150,
+  // Container for the back button
+  header: {
     paddingHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  textContainer: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  // Scrollable content
+  contentContainer: {
+    flex: 1,
+  },
+  scrollContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  // Title
+  title: {
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 20,
+  },
+  // Smaller instruction text
+  instruction: {
+    fontSize: 14,
+    color: "#333",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  // Field label
+  instructionLabel: {
+    paddingHorizontal: 20,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  outerDropdownContainer: {
+    marginTop: 50,
+  },
+  // Dropdown styling
+  dropdownContainer: {
+    marginBottom: 20,
+    padding: 20,
+  },
+  dropdownTrigger: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 6,
+    paddingHorizontal: 12,
     paddingVertical: 10,
-    borderRadius: 5,
   },
   triggerText: {
     fontSize: 16,
+  },
+  caret: {
+    fontSize: 14,
+    marginLeft: 8,
+    color: "#999",
+  },
+  // Bottom container for Continue button
+  bottomContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
   },
 });

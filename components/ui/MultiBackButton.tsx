@@ -23,14 +23,15 @@ export default function MultiBackButton({ num }: MultiBackButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#007AFF",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
     alignItems: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: "#000",
     fontSize: 16,
+    textDecorationLine: "underline",
+    fontWeight: 500,
   },
 });
