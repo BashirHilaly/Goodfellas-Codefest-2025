@@ -6,6 +6,7 @@ import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
 import { FormDataContext, RoomType } from "@/components/ui/FormDataContext";
+import BackButton from "@/components/ui/BackButton";
 
 export default function RoomDetailsScreen() {
   const {
@@ -43,6 +44,7 @@ export default function RoomDetailsScreen() {
   return (
     <View className="flex-1">
       <ProgressBar currentStep={1} />
+      <BackButton></BackButton>
       <Text className="text-6xl">Room Details</Text>
       {/* For the room type */}
       <Text className="text-3xl">Room Type</Text>

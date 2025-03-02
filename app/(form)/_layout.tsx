@@ -4,7 +4,7 @@ import { FormDataProvider } from "@/components/ui/FormDataContext";
 export default function FormLayout() {
   return (
     <FormDataProvider>
-      <Stack>
+      <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="addrTime" />
         <Stack.Screen name="confirm" />
         <Stack.Screen name="index" />

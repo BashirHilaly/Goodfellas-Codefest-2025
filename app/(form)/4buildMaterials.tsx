@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
 import CheckboxList from "@/components/ui/CheckboxList";
 import { FormDataContext } from "@/components/ui/FormDataContext";
+import BackButton from "@/components/ui/BackButton";
 
 export default function BuildMaterialsScreen() {
   const { usedMaterials, setUsedMaterials } = useContext(FormDataContext);
@@ -23,6 +24,7 @@ export default function BuildMaterialsScreen() {
   return (
     <View>
       <ProgressBar currentStep={3}></ProgressBar>
+      <BackButton></BackButton>
       <Text className="text-6xl">Building Materials</Text>
       <CheckboxList
         items={potentialMaterials}
@@ -33,14 +35,3 @@ export default function BuildMaterialsScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    marginVertical: 20,
-  },
-});
