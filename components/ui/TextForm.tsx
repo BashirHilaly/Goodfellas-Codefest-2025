@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
-type NumberFormProps = {
+type TextFormProps = {
   promptText?: string;
   value?: string;
   onChangeText?: (text: string) => void;
   placeholder?: string;
 };
 
-export default function NumberForm({
+export default function TextForm({
   promptText = "",
   value,
   onChangeText,
-  placeholder = "e.g., 42",
-}: NumberFormProps) {
+  placeholder = "Enter text here",
+}: TextFormProps) {
   const [internalValue, setInternalValue] = useState("");
 
   const handleChangeText = (text: string) => {
@@ -32,7 +32,6 @@ export default function NumberForm({
         value={value !== undefined ? value : internalValue}
         onChangeText={handleChangeText}
         placeholder={placeholder}
-        keyboardType="numeric"
       />
     </View>
   );
