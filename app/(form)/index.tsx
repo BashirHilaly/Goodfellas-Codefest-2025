@@ -2,7 +2,6 @@ import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import { Link } from "expo-router";
 import TestCamera from "@/components/screens/TestCamera";
-import ProgressBar from "@/components/ui/ProgressBar";
 
 export default function InfoScreen() {
   return (
