@@ -6,11 +6,11 @@ import BackButton from "@/components/ui/BackButton";
 
 export default function CameraScreen() {
   return (
-    <SafeAreaView className="flex-1">
-      <View className="absolute z-10">
+    <View className="flex-1">
+      <View className="absolute z-10 top-10 left-4">
         <BackButton></BackButton>
       </View>
       <TestCamera />
-    </SafeAreaView>
+    </View>
   );
 }

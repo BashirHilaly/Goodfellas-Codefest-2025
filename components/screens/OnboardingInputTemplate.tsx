@@ -1,6 +1,6 @@
 import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native'
 import React, { PropsWithChildren } from 'react'
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 const OnboardingInputTemplate = ({ children, progressLevel, continueHref, progressBarPresent = true, backButtonPresent = true, backHref }: PropsWithChildren<{
   progressLevel: number;
@@ -10,23 +10,27 @@ const OnboardingInputTemplate = ({ children, progressLevel, continueHref, progre
   backHref?: string;
 }>) => {
 
+  const router = useRouter();
+
   if (!progressBarPresent) {
     return (
       <SafeAreaView className="min-h-screen">
       {backButtonPresent && backHref && (
-        <Link href={backHref as any} className="absolute left-4 top-4">
-          <TouchableOpacity className="p-2">
-            <Text className="text-lg font-semibold">←</Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity 
+          className="absolute left-4 top-4 p-2"
+          onPress={() => router.push(backHref as any)}
+        >
+          <Text className="text-lg font-semibold text-black">←</Text>
+        </TouchableOpacity>
       )}
       {children}
       <View className="absolute bottom-0 w-full p-4 bg-gray-300 flex-row justify-center items-center">
-        <Link href={continueHref} asChild>
-          <TouchableOpacity className="bg-[#222222] rounded-lg px-20 py-2 mb-12">
-            <Text className="text-[#F8F8F8] text-center text-lg font-semibold">Continue</Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity 
+          className="bg-[#222222] rounded-lg px-20 py-2 mb-12"
+          onPress={() => router.push(continueHref)}
+        >
+          <Text className="text-[#F8F8F8] text-center text-lg font-semibold">Continue</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
     )
@@ -42,19 +46,21 @@ const OnboardingInputTemplate = ({ children, progressLevel, continueHref, progre
         <View className={`w-1/6 h-1 ${progressLevel >= 5 ? 'bg-blue-500 shadow-md shadow-blue-500' : 'bg-gray-200'} rounded-full`}></View>
       </View>
       {backButtonPresent && backHref && (
-        <Link href={backHref as any} className="p-4">
-          <TouchableOpacity className="">
-            <ArrowLeft size={30} />
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity 
+          className="p-4"
+          onPress={() => router.push(backHref as any)}
+        >
+          <Text className="text-4xl font-semibold text-black ">←</Text>
+        </TouchableOpacity>
       )}
       {children}
       <View className="absolute bottom-0 w-full p-4 bg-gray-300 flex-row justify-center items-center">
-        <Link href={continueHref as any} className="mb-8">
-          <TouchableOpacity className="bg-[#222222] rounded-lg px-20 py-2">
-            <Text className="text-[#F8F8F8] text-center text-lg font-semibold">Continue</Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity 
+          className="bg-[#222222] rounded-lg px-20 py-2 mb-12"
+          onPress={() => router.push(continueHref)}
+        >
+          <Text className="text-[#F8F8F8] text-center text-lg font-semibold">Continue</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )

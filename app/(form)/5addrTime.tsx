@@ -14,11 +14,14 @@ import NumberForm from "@/components/ui/NumberForm";
 import TextForm from "@/components/ui/TextForm";
 import BackButton from "@/components/ui/BackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
+import OnboardingInputTemplate from "@/components/screens/OnboardingInputTemplate";
 
 export default function AddrTimeScreen() {
   const { address, setAddress, zipcode, setZipcode, timeframe, setTimeframe } =
     useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const [testingTemplate, setTestingTemplate] = useState(true);
 
   // An array to cycle through room types.
   const timeframes: Timeframe[] = [

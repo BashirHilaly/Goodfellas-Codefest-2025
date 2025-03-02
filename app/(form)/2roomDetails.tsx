@@ -26,42 +26,28 @@ export default function RoomDetailsScreen() {
   } = useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const [testingTemplate, setTestingTemplate] = useState(false);
-
-  if (testingTemplate) {
-    return (
-      <OnboardingInputTemplate
-        progressLevel={1}
-        continueHref="/(form)/3projDesc"
-        backButtonPresent={true}
-        backHref="/(form)/index"
-      >
-        <Text>Here is some info you need to know</Text>
-      </OnboardingInputTemplate>
-    );
-  }
-
-  // An array to cycle through room types.
-  const roomTypes: RoomType[] = [
-    "Kitchen",
-    "Bathroom",
-    "Bedroom",
-    "Livingroom",
-    "Garage",
-    "Basement",
-    "Attic",
-    "Hallway",
-    "Dining room",
-    "Closet",
-    "Laundry Room",
-    "Guest room",
-    "Home Office",
-  ];
-
-  const handleSelectRoom = (selected: RoomType) => {
-    setRoomType(selected);
-    setDropdownVisible(false);
-  };
+  const [testingTemplate, setTestingTemplate] = useState(true);
+    // An array to cycle through room types.
+    const roomTypes: RoomType[] = [
+      "Kitchen",
+      "Bathroom",
+      "Bedroom",
+      "Livingroom",
+      "Garage",
+      "Basement",
+      "Attic",
+      "Hallway",
+      "Dining room",
+      "Closet",
+      "Laundry Room",
+      "Guest room",
+      "Home Office",
+    ];
+  
+    const handleSelectRoom = (selected: RoomType) => {
+      setRoomType(selected);
+      setDropdownVisible(false);
+    };
 
   return (
     <View style={styles.screen}>

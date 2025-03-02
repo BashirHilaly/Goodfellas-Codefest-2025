@@ -66,9 +66,10 @@ export const generateEstimate = action({
         roomWidth: v.number(),
         roomLength: v.number(),
         projectDescription: v.string(),
-        buildingMaterials: v.array(v.string()),
+        usedMaterials: v.array(v.string()),
         address: v.string(),
         estimatedTimeFrame: v.string(),
+        zipcode: v.string(),
         photoUri: v.string(),
     },
     handler: async (ctx, args) => {
