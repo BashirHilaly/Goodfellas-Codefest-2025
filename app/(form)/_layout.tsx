@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { FormDataProvider } from "@/components/ui/FormDataContext";
+import { FormDataProvider } from "@/components/FormDataContext";
 
 export default function FormLayout() {
   return (

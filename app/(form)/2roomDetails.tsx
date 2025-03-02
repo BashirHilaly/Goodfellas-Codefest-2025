@@ -5,8 +5,9 @@ import ProgressBar from "@/components/ui/ProgressBar";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
-import { FormDataContext, RoomType } from "@/components/ui/FormDataContext";
+import { FormDataContext, RoomType } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
+import ContinueButton from "@/components/ui/ContinueButton";
 
 export default function RoomDetailsScreen() {
   const {
@@ -79,7 +80,7 @@ export default function RoomDetailsScreen() {
         value={roomLength.toString()}
         onChangeText={(text: string) => setRoomLength(Number(text))}
       />
-      <Link href="/(form)/3projDesc">Continue</Link>
+      <ContinueButton nextLink="/(form)/3projDesc" buttonText="Continue" />
     </View>
   );
 }

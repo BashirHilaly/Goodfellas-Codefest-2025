@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Link, useRouter } from "expo-router";
+import TestCamera from "@/components/screens/TestCamera";
+import { SafeAreaView } from "react-native-safe-area-context";
+import BackButton from "@/components/ui/BackButton";
 
 export default function CameraScreen() {
   return (
-    <View>
-      <Text className="text-red-500">This screen is the camera</Text>
-      <Link href="/(form)/9imageConfirm">Press Button!</Link>
-    </View>
+    <SafeAreaView className="flex-1">
+      <View className="absolute z-10">
+        <BackButton></BackButton>
+      </View>
+      <TestCamera />
+    </SafeAreaView>
   );
 }
