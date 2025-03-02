@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
 import DescriptionField from "@/components/ui/DescriptionField";
-import { FormDataContext } from "@/components/ui/FormDataContext";
+import { FormDataContext } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
 
@@ -20,7 +20,10 @@ export default function ProjDescScreen() {
         value={projectDescription}
         onChangeText={(text: string) => setProjectDescription(text)}
       />
-      <ContinueButton nextLink="/(form)/4buildMaterials" buttonText="Continue" />
+      <ContinueButton
+        nextLink="/(form)/4buildMaterials"
+        buttonText="Continue"
+      />
     </View>
   );
 }

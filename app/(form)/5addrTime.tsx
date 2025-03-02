@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
-import { FormDataContext, Timeframe } from "@/components/ui/FormDataContext";
+import { FormDataContext, Timeframe } from "@/components/FormDataContext";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";

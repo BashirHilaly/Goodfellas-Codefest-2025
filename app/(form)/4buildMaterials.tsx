@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
 import CheckboxList from "@/components/ui/CheckboxList";
-import { FormDataContext } from "@/components/ui/FormDataContext";
+import { FormDataContext } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
 

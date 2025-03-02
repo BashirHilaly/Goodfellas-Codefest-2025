@@ -5,7 +5,7 @@ import ProgressBar from "@/components/ui/ProgressBar";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
-import { FormDataContext, RoomType } from "@/components/ui/FormDataContext";
+import { FormDataContext, RoomType } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
 

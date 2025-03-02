@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import ProgressBar from "@/components/ui/ProgressBar";
-import { FormDataContext } from "@/components/ui/FormDataContext";
+import { FormDataContext } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import MultiBackButton from "@/components/ui/MultiBackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
