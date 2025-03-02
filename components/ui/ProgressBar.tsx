@@ -6,7 +6,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep }) => {
-  const totalSteps = 6;
+  const totalSteps = 5;
 
   return (
     // Use absolute positioning to display at the top. Adjust these styles as needed.

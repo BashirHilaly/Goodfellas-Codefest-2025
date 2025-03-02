@@ -1,30 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
 import { MenuOption } from "@/components/ui/MenuOption";
 import NumberForm from "@/components/ui/NumberForm";
-
-type RoomType =
-  | "Kitchen"
-  | "Bathroom"
-  | "Bedroom"
-  | "Livingroom"
-  | "Garage"
-  | "Basement"
-  | "Attic"
-  | "Hallway"
-  | "Dining room"
-  | "Closet"
-  | "Laundry Room"
-  | "Guest room"
-  | "Home Office";
+import { FormDataContext, RoomType } from "@/components/ui/FormDataContext";
 
 export default function RoomDetailsScreen() {
-  const [roomType, setRoomType] = useState<RoomType>("Kitchen");
-  const [surfaceArea, setSurfaceArea] = useState(0);
-  const [wallHeight, setwallHeight] = useState(0);
+  const {
+    roomType,
+    setRoomType,
+    roomWidth,
+    setRoomWidth,
+    roomLength,
+    setRoomLength,
+  } = useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   // An array to cycle through room types.
@@ -51,19 +42,18 @@ export default function RoomDetailsScreen() {
 
   return (
     <View className="flex-1">
-      <ProgressBar currentStep={1}></ProgressBar>
+      <ProgressBar currentStep={1} />
       <Text className="text-6xl">Room Details</Text>
       {/* For the room type */}
       <Text className="text-3xl">Room Type</Text>
       <View className="mt-8 items-center">
-        <Text className="text-lg mb-2">Selected Room Type: {roomType}</Text>
         <DropdownMenu
           visible={dropdownVisible}
           handleOpen={() => setDropdownVisible(true)}
           handleClose={() => setDropdownVisible(false)}
           trigger={
             <View style={styles.triggerStyle}>
-              <Text style={styles.triggerText}>Select Room Type</Text>
+              <Text style={styles.triggerText}>{roomType}</Text>
             </View>
           }
         >
@@ -75,18 +65,18 @@ export default function RoomDetailsScreen() {
         </DropdownMenu>
       </View>
 
-      {/* For the room type */}
+      {/* For the room dimensions */}
       <Text className="text-3xl">Room Dimensions</Text>
       <NumberForm
-        promptText="Floor Area (ft^2)"
-        value={surfaceArea.toString()}
-        onChangeText={(text: String) => setSurfaceArea(Number(text))}
-      ></NumberForm>
+        promptText="Width (ft)"
+        value={roomWidth.toString()}
+        onChangeText={(text: string) => setRoomWidth(Number(text))}
+      />
       <NumberForm
-        promptText="Wall Height (ft)"
-        value={wallHeight.toString()}
-        onChangeText={(text: String) => setwallHeight(Number(text))}
-      ></NumberForm>
+        promptText="Length (ft)"
+        value={roomLength.toString()}
+        onChangeText={(text: string) => setRoomLength(Number(text))}
+      />
       <Link href="/(form)/3projDesc">Continue</Link>
     </View>
   );
@@ -103,9 +93,9 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: "white",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    width: 100,
+    width: 150,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
