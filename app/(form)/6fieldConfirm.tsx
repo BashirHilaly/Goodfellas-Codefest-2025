@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { FormDataContext } from "@/components/FormDataContext";
 import BackButton from "@/components/ui/BackButton";
 import MultiBackButton from "@/components/ui/MultiBackButton";
 import ContinueButton from "@/components/ui/ContinueButton";
+import OnboardingInputTemplate from "@/components/screens/OnboardingInputTemplate";
 
 export default function fieldConfirmScreen() {
   const {
@@ -17,6 +18,50 @@ export default function fieldConfirmScreen() {
     zipcode,
     timeframe,
   } = useContext(FormDataContext);
+
+  const [testingTemplate, setTestingTemplate] = useState(true);
+
+  if (testingTemplate) {
+    return (
+      <OnboardingInputTemplate progressLevel={5} continueHref="/(form)/7photoPrompt" backButtonPresent={true} backHref="/(form)/5addrTime">
+        <ScrollView className="px-10">
+          <Text className="text-3xl font-bold pt-8">Confirm Inputs</Text>
+          {/* Project Description */}
+          <View className="pt-4">
+            <Text className="text-xl font-semibold">Project Description</Text>
+            <Text className="text-base pt-1">{projectDescription || "-"}</Text>
+          </View>
+
+          {/* Room Details */}
+          <View className="pt-6">
+            <Text className="text-xl font-semibold">Room Details</Text>
+            <View className="pt-1">
+              <Text className="text-base">Room Type: {roomType}</Text>
+              <Text className="text-base">Dimensions: {roomWidth} ft x {roomLength} ft</Text>
+            </View>
+          </View>
+
+          {/* Building Materials */}
+          <View className="pt-6">
+            <Text className="text-xl font-semibold">Building Materials</Text>
+            <Text className="text-base pt-1">
+              {usedMaterials.length > 0 ? usedMaterials.join(", ") : "-"}
+            </Text>
+          </View>
+
+          {/* Location & Timeline */}
+          <View className="pt-6 pb-8">
+            <Text className="text-xl font-semibold">Location & Timeline</Text>
+            <View className="pt-1">
+              <Text className="text-base">Address: {address || "-"}</Text>
+              <Text className="text-base">Zipcode: {zipcode || "-"}</Text>
+              <Text className="text-base">Timeframe: {timeframe}</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </OnboardingInputTemplate>
+    )
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

@@ -8,13 +8,13 @@ import { Camera, FileChartLine, NotebookText, Upload } from "lucide-react-native
 
 export default function InfoScreen() {
 
-  const [splashScreenActive, setSplashScreenActive] = useState(false);
+  const [splashScreenActive, setSplashScreenActive] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSplashScreenActive(false);
-  //   }, 3000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashScreenActive(false);
+    }, 3000);
+  }, []);
 
   if (splashScreenActive) {
     return (

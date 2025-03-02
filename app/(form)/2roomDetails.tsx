@@ -21,37 +21,79 @@ export default function RoomDetailsScreen() {
   } = useContext(FormDataContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const [testingTemplate, setTestingTemplate] = useState(false);
+  const [testingTemplate, setTestingTemplate] = useState(true);
+    // An array to cycle through room types.
+    const roomTypes: RoomType[] = [
+      "Kitchen",
+      "Bathroom",
+      "Bedroom",
+      "Livingroom",
+      "Garage",
+      "Basement",
+      "Attic",
+      "Hallway",
+      "Dining room",
+      "Closet",
+      "Laundry Room",
+      "Guest room",
+      "Home Office",
+    ];
+  
+    const handleSelectRoom = (selected: RoomType) => {
+      setRoomType(selected);
+      setDropdownVisible(false);
+    };
 
   if (testingTemplate) {
     return (
       <OnboardingInputTemplate progressLevel={1} continueHref="/(form)/3projDesc" backButtonPresent={true} backHref="/(form)/index">
-        <Text>Here is some info you need to know</Text>
+      <View className="px-10">
+        <Text className="text-3xl font-bold">Room Details</Text>
+        <View className="mt-32">
+          <Text className="text-2xl font-medium">Room Type</Text>
+            <View className="py-2">
+              <DropdownMenu
+                visible={dropdownVisible}
+                handleOpen={() => setDropdownVisible(true)}
+                handleClose={() => setDropdownVisible(false)}
+                trigger={
+                  <View className="bg-white p-4 rounded-lg border border-gray-300 shadow-sm">
+                    <Text className="text-lg font-medium text-gray-800">{roomType}</Text>
+                  </View>
+                }
+              >
+                {roomTypes.map((type, index) => (
+                  <MenuOption key={index} onSelect={() => handleSelectRoom(type)}>
+                    <Text>{type}</Text>
+                  </MenuOption>
+                ))}
+              </DropdownMenu>
+            </View>
+        </View>
+        <View className="pt-16">
+          <Text className="text-2xl font-medium">Room Dimensions</Text>
+          <Text className="italic pt-2">Measure the longest width and length of the space in feet.</Text>
+          <View className="flex-row space-x-4">
+            <NumberForm
+              promptText="Width (ft)"
+              placeholder="X"
+              value={roomWidth.toString()}
+              onChangeText={(text: string) => setRoomWidth(Number(text))}
+            />
+            <NumberForm
+              promptText="Length (ft)"
+              placeholder="Y"
+              value={roomLength.toString()}
+              onChangeText={(text: string) => setRoomLength(Number(text))}
+            />
+          </View>
+        </View>
+      </View>
       </OnboardingInputTemplate>
     );
   }
 
-  // An array to cycle through room types.
-  const roomTypes: RoomType[] = [
-    "Kitchen",
-    "Bathroom",
-    "Bedroom",
-    "Livingroom",
-    "Garage",
-    "Basement",
-    "Attic",
-    "Hallway",
-    "Dining room",
-    "Closet",
-    "Laundry Room",
-    "Guest room",
-    "Home Office",
-  ];
-
-  const handleSelectRoom = (selected: RoomType) => {
-    setRoomType(selected);
-    setDropdownVisible(false);
-  };
+ 
 
   return (
     <View className="flex-1">
