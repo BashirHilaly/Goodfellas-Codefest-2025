@@ -34,7 +34,7 @@ export default function LoadingScreen() {
           address: formData.address,
           zipcode: formData.zipcode.toString(),
           estimatedTimeFrame: formData.timeframe,
-          photo: formData.photoBase64!,
+          photoUri: formData.photoBase64!,
           projectDescription: formData.projectDescription,
         });
 
@@ -90,7 +90,9 @@ const EstimateScreen = ({ estimate }: { estimate: any }) => {
             {task.sub_tasks.map((subTask: any, subIndex: number) => (
               <View key={subIndex} className="ml-4 mb-2">
                 <Text className="font-medium">{subTask.sub_task_name}</Text>
-                <Text className="text-gray-500">{subTask.sub_task_description}</Text>
+                <Text className="text-gray-500">
+                  {subTask.sub_task_description}
+                </Text>
               </View>
             ))}
           </View>
@@ -98,11 +100,14 @@ const EstimateScreen = ({ estimate }: { estimate: any }) => {
           {/* Materials */}
           {task.task_materials && (
             <View>
-              <Text className="text-lg font-semibold mb-2">Materials Needed:</Text>
+              <Text className="text-lg font-semibold mb-2">
+                Materials Needed:
+              </Text>
               {task.task_materials.map((material: any, matIndex: number) => (
                 <View key={matIndex} className="ml-4 mb-1">
                   <Text>
-                    {material.material_name} - {material.material_quantity} units at ${material.material_unit_price}/unit
+                    {material.material_name} - {material.material_quantity}{" "}
+                    units at ${material.material_unit_price}/unit
                   </Text>
                 </View>
               ))}

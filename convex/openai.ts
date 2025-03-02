@@ -8,7 +8,7 @@ const prompt = `
     You need to generate a list of tasks that need to be completed to renovate the room.
     You need to generate a list of materials that need to be purchased to complete the tasks.
 
-    It must be in the following JSON format:
+    It MUST be in the following JSON format:
         tasks_list: v.array(v.object({
             task_name: v.string(),
             task_description: v.string(),
@@ -78,6 +78,7 @@ export const generateEstimate = action({
         });
 
         try {
+            const newPrompt = `This is the project description ${args.projectDescription}` + prompt
             const response = await openai.chat.completions.create({
               model: "gpt-4o-mini",
               messages: [
@@ -85,16 +86,17 @@ export const generateEstimate = action({
                   role: "user",
                   content: [
                     { type: "text", text: prompt },
-                    { type: "image_url", image_url: { url: args.photoUri } }
+                    { type: "image_url", image_url: { url: `data:image/jpeg;base64,${args.photoUri}`}}
                   ]
                 }
               ],
-              max_tokens: 700,
+              max_tokens: 1000,
             });
       
             if (response.choices[0].message.content) {
               const responseContent = JSON.parse(response.choices[0].message.content.replace(/```json\n|\n```/g, ''));
 
+              return responseContent;
             }
             else {
               return "error";
