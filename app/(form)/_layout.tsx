@@ -1,27 +1,20 @@
 import { Stack } from "expo-router";
+import { FormDataProvider } from "@/components/ui/FormDataContext";
 
 export default function FormLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#f4511e",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <Stack.Screen name="addrTime" />
-      <Stack.Screen name="confirm" />
-      <Stack.Screen name="info" />
-      <Stack.Screen name="materials" />
-      <Stack.Screen name="project" />
-      <Stack.Screen name="roomDetails" />
-      <Stack.Screen name="camera" />
-      <Stack.Screen name="capture" />
-      <Stack.Screen name="imageConfirm" />
-    </Stack>
+    <FormDataProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="addrTime" />
+        <Stack.Screen name="confirm" />
+        <Stack.Screen name="index" />
+        <Stack.Screen name="materials" />
+        <Stack.Screen name="project" />
+        <Stack.Screen name="roomDetails" />
+        <Stack.Screen name="camera" />
+        <Stack.Screen name="capture" />
+        <Stack.Screen name="imageConfirm" />
+      </Stack>
+    </FormDataProvider>
   );
 }
