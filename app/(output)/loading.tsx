@@ -4,6 +4,8 @@ import React, { useEffect, useContext } from "react";
 import { FormDataContext } from "@/components/FormDataContext";
 import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import LoadingSpinner from "@/components/ui/LoadingSpinner"; // Adjust import path
+import { Bold } from "lucide-react-native";
 
 export default function LoadingScreen() {
   const router = useRouter();
@@ -19,8 +21,6 @@ export default function LoadingScreen() {
     photoUri,
   } = useContext(FormDataContext);
 
-
-
   console.log("Input data:", projectDescription);
 
   const testGPT = useAction(api.openai.testOpenAi);
@@ -33,8 +33,7 @@ export default function LoadingScreen() {
 
   //   const results = testGPT({ image: inputData.photoUri! });
   //   console.log("Results:", results);
-    
-    
+
   //   // Set a timer to navigate to the Info Screen after 3 seconds
   //   const timer = setTimeout(() => {
   //     router.replace("/(output)/estimate");
@@ -45,11 +44,23 @@ export default function LoadingScreen() {
   // }, [router]);
 
   return (
-    <View>
-      <Text className="text-green-500">
-        Hello! I am currently loading your data into the AI model. Please wait
-        until it is done.
-      </Text>
+    <View style={styles.container}>
+      <LoadingSpinner />
+      <Text style={styles.loadingText}>Generating your Estimate…</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#0B0BB8", // Solid blue background
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loadingText: {
+    marginTop: 20,
+    color: "#FFFFFF",
+    fontSize: 20,
+  },
+});

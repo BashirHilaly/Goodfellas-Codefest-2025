@@ -4,11 +4,13 @@ import { View, TextInput, StyleSheet } from "react-native";
 type DescriptionFieldProps = {
   value?: string;
   onChangeText?: (text: string) => void;
+  placeholder?: string;
 };
 
 export default function DescriptionField({
   value = "",
   onChangeText,
+  placeholder = "Enter your description...",
 }: DescriptionFieldProps) {
   return (
     <View style={styles.container}>
@@ -16,7 +18,7 @@ export default function DescriptionField({
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
-        placeholder="Enter your description..."
+        placeholder={placeholder}
         multiline
         numberOfLines={4}
       />
@@ -26,13 +28,14 @@ export default function DescriptionField({
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    marginVertical: 10,
   },
   input: {
-    height: 100,
+    height: 180,
     borderColor: "gray",
     borderWidth: 1,
     padding: 10,
     textAlignVertical: "top", // ensures text starts at the top on Android
+    borderRadius: 10,
   },
 });
