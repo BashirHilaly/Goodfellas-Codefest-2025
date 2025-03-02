@@ -26,14 +26,17 @@ export default function ContinueButton({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#3B82F6", // Equivalent to bg-blue-500
-    paddingHorizontal: 16, // Equivalent to px-4
-    paddingVertical: 8, // Equivalent to py-2
-    borderRadius: 8, // Equivalent to rounded-lg
+    width: "100%", // Make the button a bit wider
+    height: 70,
+    backgroundColor: "#000",
+    paddingVertical: 15, // More vertical padding
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
-    color: "#fff", // text-white
-    fontWeight: "600", // font-semibold
-    textAlign: "center", // text-center
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 20,
   },
 });

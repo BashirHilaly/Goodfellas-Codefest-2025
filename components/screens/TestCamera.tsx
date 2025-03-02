@@ -1,4 +1,4 @@
-import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import { useRef, useState, useContext } from "react";
 import {
   Button,
@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   View,
   Image,
+  StyleSheet,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
 import { useRouter } from "expo-router";
 import { FormDataContext } from "../FormDataContext";
 
 const TestCamera = () => {
-  const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState<string | null>(null);
   const cameraRef = useRef<CameraView | null>(null);
@@ -33,10 +33,6 @@ const TestCamera = () => {
         <Button onPress={requestPermission} title="Grant Permission" />
       </SafeAreaView>
     );
-  }
-
-  function toggleCameraFacing() {
-    setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
   const takePicture = async () => {
@@ -77,34 +73,54 @@ const TestCamera = () => {
   };
 
   return (
-    <View className="flex-1 bg-blue-300">
-      <CameraView
-        ref={cameraRef}
-        className="flex-1 w-full h-full"
-        facing={facing}
-      >
-        <View className="flex-row justify-around h-96">
-          <TouchableOpacity
-            className="bg-black/60 p-4 rounded-lg"
-            onPress={toggleCameraFacing}
-          >
-            <Text className="text-white text-base">Flip Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-black/60 p-4 rounded-lg"
-            onPress={takePicture}
-          >
-            <Text className="text-white text-base">Take Photo</Text>
+    <View style={styles.container}>
+      <CameraView ref={cameraRef} style={styles.camera}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={takePicture} style={styles.outerRing}>
+            <View style={styles.button}></View>
           </TouchableOpacity>
         </View>
       </CameraView>
-      {photo && (
-        <View className="absolute right-2.5 top-2.5 w-[100px] h-[150px] rounded-lg overflow-hidden">
-          <Image source={{ uri: photo }} className="w-full h-full" />
-        </View>
-      )}
     </View>
   );
 };
 
 export default TestCamera;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  camera: {
+    flex: 1,
+  },
+  // Positions the outer ring at the bottom center with margin from the bottom
+  buttonContainer: {
+    position: "absolute",
+    bottom: 80,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  // The outer ring: a slightly larger circle with a thin border
+  outerRing: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 2,
+    borderColor: "rgba(4, 4, 72, 0.6)", // thin white ring, adjust color as needed
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  // The main button: a large opaque circle
+  button: {
+    backgroundColor: "rgba(4, 4, 72, 0.9)",
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

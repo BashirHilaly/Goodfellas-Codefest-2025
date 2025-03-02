@@ -20,14 +20,18 @@ export default function BackButton({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#007AFF",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    width: "100%",
+    height: 70,
+    backgroundColor: "#FFF",
+    paddingVertical: 15,
+    borderRadius: 8,
+    borderWidth: 1.5,
     alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "#000",
+    fontSize: 20,
+    fontWeight: "600",
   },
 });
