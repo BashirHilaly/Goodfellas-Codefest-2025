@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
 
 const EstimateScreen = ({ estimate }: { estimate: any }) => {
   return (
-    <ScrollView className="p-4">
+    <ScrollView className="p-4 pt-10">
+      <Text className="font-bold text-2xl py-8">Estimated Total: $8,000.00</Text>
       {estimate.tasks_list.map((task: any, index: number) => (
         <View key={index} className="bg-white p-4 rounded-lg shadow-md mb-4">
           <Text className="text-xl font-bold mb-2">{task.task_name}</Text>

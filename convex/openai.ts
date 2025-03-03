@@ -70,7 +70,7 @@ export const generateEstimate = action({
         address: v.string(),
         estimatedTimeFrame: v.string(),
         zipcode: v.string(),
-        photoUri: v.string(),
+        photo: v.string(),
     },
     handler: async (ctx, args) => {
         const openai = new OpenAI({
@@ -78,23 +78,27 @@ export const generateEstimate = action({
         });
 
         try {
+            const newPrompt = `The project description is ${args.projectDescription}.` + prompt;
             const response = await openai.chat.completions.create({
               model: "gpt-4o-mini",
               messages: [
                 {
                   role: "user",
                   content: [
-                    { type: "text", text: prompt },
-                    { type: "image_url", image_url: { url: args.photoUri } }
+                    { type: "text", text: newPrompt },
+                    { type: "image_url", image_url: { url: `data:image/jpeg;base64,${args.photo}` } }
                   ]
                 }
               ],
-              max_tokens: 700,
+              max_tokens: 800,
             });
       
             if (response.choices[0].message.content) {
-              const responseContent = JSON.parse(response.choices[0].message.content.replace(/```json\n|\n```/g, ''));
 
+                console.log("Response:", response.choices[0].message.content);
+                const responseContent = JSON.parse(response.choices[0].message.content.replace(/```json\n|\n```/g, ''));
+                console.log("Response Content:", responseContent);
+                return responseContent;
             }
             else {
               return "error";
